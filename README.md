@@ -1,93 +1,168 @@
 # Global Team Meeting Optimizer
  
-## Situation
+AI-assisted decision support for scheduling recurring meetings across globally distributed teams.
+ 
+---
+ 
+# Situation
  
 Global teams often struggle to schedule recurring meetings across multiple regions.
  
-A manager must manually:
+Managers must manually:
  
 - Check Outlook calendars
 - Convert time zones
 - Account for daylight saving changes
-- Balance inconvenience across regions
-- Evaluate competing meeting options
+- Evaluate attendee availability
+- Balance regional inconvenience
+- Compare multiple scheduling options
  
-This process is time-consuming and difficult to repeat consistently.
+The process is time-consuming, difficult to repeat consistently, and often produces subjective results.
  
 ---
  
-## What We Assumed
+# Business Question
+ 
+> Can AI identify the fairest feasible meeting time faster and more consistently than a human manager?
+ 
+---
+ 
+# What We Assumed
  
 We assumed:
  
-- Outlook availability is accurate
-- Team members can participate between 5:00 AM and 11:00 PM local time
-- A meeting time can be evaluated objectively using fairness criteria
- 
-The key question:
- 
-> Can AI identify the fairest feasible meeting time faster than a human manager?
+- Outlook availability is reliable
+- Team members can reasonably participate between 5:00 AM and 11:00 PM local time
+- Time-zone inconvenience can be evaluated objectively
+- AI can recommend options, while managers retain decision authority
  
 ---
  
-## AI Solution
+# Architecture
  
-The Global Team Meeting Optimizer:
+```mermaid
+flowchart LR
  
-- Evaluates Outlook availability
-- Automatically applies daylight saving rules
-- Converts local times across regions
-- Eliminates infeasible options
-- Scores remaining options using weighted criteria
+A[Outlook Availability]
+B[Time Zones]
+C[Daylight Saving Rules]
  
-### Weighted Score
+A --> D
+B --> D
+C --> D
  
-60% Time-Zone Comfort
+D[AI Meeting Optimizer]
  
-40% Outlook Availability
+D --> E[Evaluate Feasible Time Windows]
+D --> F[Calculate Time Zone Comfort]
+D --> G[Detect Calendar Conflicts]
  
----
+E --> H[Weighted Scoring Engine]
+F --> H
+G --> H
  
-## Human Decision
+H --> I[Top 3 Recommendations]
  
-AI recommends options.
+I --> J[Manager Review]
  
-The manager remains accountable for selecting the final meeting time.
- 
-The system supports decision-making rather than replacing it.
- 
----
- 
-## Known Limits
- 
-- Prototype uses synthetic data
-- No live Outlook integration
-- No holiday calendars
-- No travel schedules
-- No recurring meeting history
-- All attendees treated as required
+J --> K[Final Scheduling Decision]
+```
  
 ---
  
-## Demo
+# How AI Creates Value
  
-Open:
+The AI performs the analysis, not the decision.
  
-index.html
+### AI Responsibilities
  
-or
+- Evaluate candidate meeting times
+- Convert local times
+- Handle daylight saving changes
+- Detect scheduling conflicts
+- Calculate fairness scores
+- Rank meeting options
  
-GitHub Pages site
+### Human Responsibilities
  
-to run the prototype.
+- Review recommendations
+- Consider business priorities
+- Make final scheduling decisions
  
 ---
  
-## Future Enhancements
+# Weighted Scoring Model
  
-- Microsoft Graph integration
-- Live Outlook availability
-- Holiday calendars
-- Recurring-meeting fairness history
-- Required vs optional attendees
-- Regional weighting
+The recommendation score is fully transparent.
+ 
+```text
+Weighted Score
+ 
+=
+(Time-Zone Comfort × 60%)
+ 
++
+ 
+(Outlook Availability × 40%)
+```
+ 
+### Time-Zone Comfort
+ 
+Measures how reasonable the meeting time is for each attendee.
+ 
+- 100 = standard working hours
+- Lower score = closer to the awake-hour boundary
+- Outside awake hours = rejected
+ 
+### Outlook Availability
+ 
+Measures attendee availability.
+ 
+- 100 = all required attendees available
+- Lower values reflect conflicts
+ 
+---
+ 
+# Known / Interpreted / Important / Unknown
+ 
+## Known
+ 
+- Time zones
+- DST rules
+- Outlook availability
+- Meeting duration
+- Awake-hour constraints
+ 
+## Interpreted
+ 
+- Fairness score
+- Time-zone comfort score
+- Ranking of meeting options
+ 
+## Important
+ 
+- Required attendee coverage
+- Scheduling conflicts
+- Extreme early-morning or late-evening meetings
+ 
+## Unknown
+ 
+- Personal preferences
+- Travel schedules
+- Regional holidays
+- Participant willingness to attend outside working hours
+- Business importance of specific attendees
+ 
+---
+ 
+# Read Me
+ 
+## Purpose
+ 
+This prototype demonstrates how AI can support a common operational decision:
+ 
+> Selecting the best recurring meeting time for a global team.
+ 
+Instead of replacing the manager, the AI removes the manual analysis effort and presents ranked recommendations.
+ 
+---
